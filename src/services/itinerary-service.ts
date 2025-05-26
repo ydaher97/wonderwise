@@ -24,7 +24,7 @@ import {
  */
 export async function saveItinerary(
   userId: string,
-  itineraryData: NewItineraryData // `itineraryData.itineraryText` is expected to be a JSON string
+  itineraryData: NewItineraryData 
 ): Promise<string> {
   if (!userId) {
     throw new Error('User ID is required to save an itinerary.');
@@ -40,7 +40,7 @@ export async function saveItinerary(
 
     const itinerariesCol = collection(db, 'itineraries');
     const docRef = await addDoc(itinerariesCol, {
-      ...itineraryData, // `name` is itineraryTitle, `itineraryText` is JSON string of structuredItinerary
+      ...itineraryData, 
       userId,
       createdAt: Timestamp.now(),
     });
@@ -77,21 +77,20 @@ export async function getUserItineraries(userId: string): Promise<Array<SavedIti
         structuredItinerary = JSON.parse(data.itineraryText) as GenerateItineraryOutput['structuredItinerary'];
       } catch (e) {
         console.error(`Failed to parse itineraryText for itinerary ID ${docSnap.id}:`, e);
-        // Return empty structure or handle error as appropriate
       }
       return {
         id: docSnap.id,
         userId: data.userId,
-        name: data.name, // This is the itineraryTitle
+        name: data.name, 
         destination: data.destination,
         startDate: data.startDate,
         endDate: data.endDate,
         numberOfPeople: data.numberOfPeople,
         budget: data.budget,
         preferences: data.preferences,
-        itineraryText: data.itineraryText, // Keep the original JSON string
+        itineraryText: data.itineraryText, 
         createdAt: (data.createdAt as Timestamp).toDate().toISOString(),
-        structuredItinerary, // Add the parsed structure
+        structuredItinerary, 
       } as SavedItinerary & { structuredItinerary: GenerateItineraryOutput['structuredItinerary'] };
     });
   } catch (error) {

@@ -6,7 +6,8 @@
 
 import {ai} from '@/ai/genkit';
 import {z} from 'genkit';
-import { fetchPlaceSuggestions, Place } from '@/services/places-service';
+import { fetchPlaceSuggestions } from '@/services/places-service';
+import type { Place } from '@/lib/mock-data';
 
 const FindPlacesInputSchema = z.object({
   location: z.string().describe('The city and country, e.g., "Paris, France".'),

@@ -5,7 +5,7 @@ import type { GenerateItineraryInput, GenerateItineraryOutput } from "@/ai/flows
 import { generateItinerary } from "@/ai/flows/generate-itinerary";
 import { useItineraryStore } from "@/lib/store";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useRouter, useSearchParams } from "next/navigation"; // Import useSearchParams
+import { useRouter, useSearchParams } from "next/navigation"; 
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
@@ -40,7 +40,7 @@ const GenerateItineraryFormSchema = z.object({
 
 export function TripForm() {
   const router = useRouter();
-  const searchParams = useSearchParams(); // Get search params
+  const searchParams = useSearchParams(); 
   const { user } = useAuth();
   const { setGeneratedItinerary, setIsLoading, setError, clearItinerary } = useItineraryStore();
   const { toast } = useToast();

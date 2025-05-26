@@ -175,7 +175,7 @@ export function ItineraryDisplay() {
                         onMouseLeave={() => setHoveredActivityId(null)}
                       >
                         <CardContent className="p-0">
-                          {/* {activity.placeDetails?.imageUrl && (
+                          {activity.placeDetails?.imageUrl && (
                             <div className="relative w-full h-48 rounded-t-lg overflow-hidden">
                               <Image 
                                 src={activity.placeDetails.imageUrl} 
@@ -186,13 +186,12 @@ export function ItineraryDisplay() {
                                 data-ai-hint={`${activity.placeDetails.category || 'activity'} ${activity.placeDetails.name?.split(' ').slice(0,2).join(' ')}`}
                                 priority={false}
                                 onError={(e) => {
-                                  // Replace the failed image with a placeholder
                                   const target = e.target as HTMLImageElement;
-                                  target.src = '/placeholder-image.jpg'; // Make sure to add a placeholder image in your public folder
+                                  target.src = '/placeholder-image.jpg'; 
                                 }}
                               />
                             </div>
-                          )} */}
+                          )}
                           <div className="p-4">
                             <div className="flex items-start gap-3">
                               {activity.placeDetails ? <MapPin className="h-5 w-5 text-primary mt-1 flex-shrink-0" /> : <CheckSquare className="h-5 w-5 text-primary mt-1 flex-shrink-0" />}

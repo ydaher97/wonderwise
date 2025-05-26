@@ -23,7 +23,6 @@ const GenerateItineraryInputSchema = z.object({
 });
 export type GenerateItineraryInput = z.infer<typeof GenerateItineraryInputSchema>;
 
-// New Structured Output Schemas
 const ActivityPlaceDetailsSchema = z.object({
   id: z.string().describe("Google Place ID or unique identifier from the findPlacesTool."),
   name: z.string().describe("The exact name of the place as returned by the findPlacesTool."),
@@ -144,11 +143,8 @@ const generateItineraryFlow = ai.defineFlow(
     if (!output) {
       throw new Error("AI failed to generate itinerary output.");
     }
-    // Ensure `structuredItinerary` is an array, even if AI messed up.
     if (!output.structuredItinerary || !Array.isArray(output.structuredItinerary)) {
-        // Attempt to provide a fallback or log an error more clearly
         console.error("AI output for structuredItinerary was not an array or was missing:", output.structuredItinerary);
-        // You might want to throw a more specific error or return a default structure
         return { itineraryTitle: output.itineraryTitle || "Generated Itinerary", structuredItinerary: [] };
     }
     return output;

@@ -7,7 +7,7 @@ import { ChevronRight, MapPin, CalendarDays, Users } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useAuth } from "@/contexts/AuthContext"; // Import useAuth
-
+import MainImg from './img.png'
 export default function HomePage() {
   const { user, loading } = useAuth(); // Get user and loading state
 
@@ -19,7 +19,7 @@ export default function HomePage() {
         <div className="container px-4 md:px-6">
           <div className="grid gap-6 lg:grid-cols-[1fr_400px] lg:gap-12 xl:grid-cols-[1fr_600px]">
             <Image
-              src="https://placehold.co/1200x800.png"
+              src={MainImg}
               alt="Travel collage"
               width={1200}
               height={800}

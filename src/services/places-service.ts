@@ -3,7 +3,7 @@
 /**
  * @fileOverview A service to fetch place suggestions using Google Places API.
  */
-import type { Place } from '@/lib/mock-data'; // Place interface can still be useful
+import type { Place } from '@/lib/mock-data'; 
 
 export interface GooglePlacePhoto {
   photo_reference: string;
@@ -41,9 +41,9 @@ interface GooglePlacesTextSearchResponse {
  * using Google Places API (Text Search).
  */
 export async function fetchPlaceSuggestions(
-  location: string, // e.g., "Paris, France"
+  location: string, 
   placeType: "restaurant" | "tourist_attraction" | "cafe",
-  query?: string // e.g., "Eiffel Tower", "pizza"
+  query?: string 
 ): Promise<Place[]> {
   const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
 
@@ -52,12 +52,8 @@ export async function fetchPlaceSuggestions(
     return [];
   }
 
-  // Construct a clear query for the Google Places API
-  // Example: if query = "Eiffel Tower", placeType = "tourist_attraction", location = "Paris, France"
-  //   -> "Eiffel Tower tourist_attraction in Paris, France"
-  // Example: if query = undefined, placeType = "restaurant", location = "Rome, Italy"
-  //   -> "restaurant in Rome, Italy"
   const fullQuery = query ? `${query} ${placeType} in ${location}` : `${placeType} in ${location}`;
+  console.log({fullQuery});
 
   const url = `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${encodeURIComponent(fullQuery)}&key=${apiKey}`;
 
@@ -84,7 +80,7 @@ export async function fetchPlaceSuggestions(
       if (p.photos && p.photos.length > 0) {
         imageUrl = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${p.photos[0].photo_reference}&key=${apiKey}`;
       }
-
+      console.log(p.photos || "No photo reference");
       return {
         id: p.place_id,
         name: p.name,
@@ -93,7 +89,6 @@ export async function fetchPlaceSuggestions(
         lat: p.geometry?.location.lat,
         lng: p.geometry?.location.lng,
         imageUrl: imageUrl,
-        // You could also add rating: p.rating, user_ratings_total: p.user_ratings_total if needed by Place interface
       };
     }).slice(0, 5); // Limit to 5 results
 
